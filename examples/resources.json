@@ -52,7 +52,7 @@
                 },
 
                 "tags": { 
-                  "description" :     "The users that the command may be run as.",
+                  "description" :     "Tags associated with this sudoers entry.",
                   "enum" :            [ "PASSWD", "NOPASSWD", "EXEC", "NOEXEC", "SETENV", "NOSETENV", "LOG_INPUT", "NOLOG_INPUT" ],
                   "required" :        false
                 }
