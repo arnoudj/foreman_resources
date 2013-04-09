@@ -1,0 +1,67 @@
+{
+  "$schema" :             "http://json-schema.org/draft-03/schema#",
+  "type":                 "object",
+  "properties": {
+
+    "sudo": {
+      "type":           "object",
+      "additionalProperties": false,
+      "properties": {
+        "sudoers": {
+          "type":       "object",
+          "additionalProperties": false,
+          "patternProperties": {
+
+            "^[A-Za-z0-9_]+$"
+              "type" :                "object",
+              "properties": {
+
+                "users": { 
+                  "description" :     "System user which will be the owner of this virtual host.",
+                  "type" :            "array",
+                  "items" :           { "type" : "string", "pattern" : "^[a-z0-9][a-z0-9\-\.]*$" },
+                  "required" :        true
+                },
+
+                "ensure": {
+                  "description" :     "Enable or disable the sudoers entry.",
+                  "enum":             [ "present", "absent", "true", "false", true, false ],
+                  "required" :        false
+                },
+
+                "cmnds": { 
+                  "description" :     "Array with commands that the user can run.",
+                  "type" :            "array",
+                  "items" :           { "type" : "string" },
+                  "required" :        false
+                },
+
+                "comment": { 
+                  "description" :     "System user which will be the owner of this virtual host.",
+                  "type" :            "array",
+                  "items" :           { "type" : "string" },
+                  "required" :        false
+                },
+
+                "runas": { 
+                  "description" :     "The users that the command may be run as.",
+                  "type" :            "array",
+                  "items" :           { "type" : "string", "pattern" : "^[a-z0-9][a-z0-9\-\.]*$" },
+                  "required" :        false
+                },
+
+                "tags": { 
+                  "description" :     "The users that the command may be run as.",
+                  "enum" :            [ "PASSWD", "NOPASSWD", "EXEC", "NOEXEC", "SETENV", "NOSETENV", "LOG_INPUT", "NOLOG_INPUT" ],
+                  "required" :        false
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
