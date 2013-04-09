@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "app/controllers/api/resources_schema.rb",
     "app/controllers/api/resources_controller.rb",
     "config/routes.rb",
+    "examples/resources.json",
   ]
   s.homepage = "http://github.com/arnoudj/foreman_resources"
   s.licenses = ["Apache License, Version 2.0"]
