@@ -7,8 +7,9 @@ resouces are passed to the class via a parameter, which contains a hash
 with the resources.
 
 As I use foreman as my ENC, I want to be able to use the parameterized
-classes of foreman. Only drawback of foreman, is that I can't validate
-JSON or YAML fields. This is where this plugin comes in.
+classes of foreman. Foreman can validate basic types like strings and
+booleans, but has no mechanism for validating YAML or JSON fields.
+This is where this plugin comes in.
 
 Resources for the Puppet classes are described in a JSON-schema. Parameters
 are validated against this schema before they are commited to the
