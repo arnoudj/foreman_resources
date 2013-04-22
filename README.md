@@ -71,7 +71,7 @@ Returns a JSON hash with all the resources of this resource type.
 
 ### Example
 
-    GET /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts
+    GET /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts/resources
     200
     {
       "www.example.com": {
@@ -90,7 +90,7 @@ Returns a JSON hash with the data for the resource.
 
 ### Example
 
-    GET /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts
+    GET /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts/resources/www.example.com
     200
     {
         "documentroot": "/var/www/www.example.com",
@@ -103,7 +103,7 @@ Update the data for the resource. If the resource does not exist, it will be cre
 
 ### Example
 
-    POST /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts
+    POST /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts/resources/www.example.com
     {
         "documentroot": "/var/www/www.example.com",
         "user":         "www-data"
@@ -120,7 +120,7 @@ Delete a resource. The data of the deleted resource is returned as JSON.
 
 ### Example
 
-    DELETE /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts
+    DELETE /api/hosts/host01.example.com/puppetclasses/apache/types/vhosts/resources/www.example.com
     200
     {
         "documentroot": "/var/www/www.example.com",
