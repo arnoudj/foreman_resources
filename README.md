@@ -29,7 +29,7 @@ Add a file to the bundler.d directory of foreman:
 */bundler.d/resources.rb*
 
     gem 'json-schema'
-    gem 'foreman_resources', :path => '/usr/share/foreman_resources'
+    gem 'foreman_resources', :git => 'https://github.com/arnoudj/foreman_resources.git'
 
 Next, as a Foreman user (not root), run the following command:
 
@@ -126,6 +126,25 @@ Delete a resource. The data of the deleted resource is returned as JSON.
         "documentroot": "/var/www/www.example.com",
         "user":         "www-data"
     }
+
+## GET /api/puppetclasses:puppetclass\_id/search
+
+Get a list of the parameters specified for all hosts that have this class 
+declared.
+
+### Example
+
+    GET /api/puppetclasses/bacula/search
+    200
+    {
+      "node01.example.com": {
+        "backup_ip": 192.168.0.13,
+        "fileset":   "full"
+      }
+      "node02.example.com": {
+        "backup_ip": 192.168.0.14,
+        "fileset":   "full"
+      }
 
 # Copyright
 
