@@ -35,7 +35,9 @@ module Api
 
       h = Host.find_by_name!(params[:host_id])
 
+      puts h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:type_id]).to_s
       lv = h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:type_id]).lookup_values.find_or_create_by_match("fqdn=#{params[:host_id]}")
+      lv.value = Hash.new if not lv.value
       lv.value[params[:id]] = @value
       lv.save
     end
