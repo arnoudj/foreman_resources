@@ -8,6 +8,11 @@ module Api
       h = Host.find_by_name!(params[:host_id])
       if schema['properties'][params[:puppetclass_id]]['properties'].has_key?(params[:type_id])
         @data = h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:type_id]).value_for(h)
+        if not params[:active_only] == "false"
+          @data.delete_if { |k,v|
+            v["ensure"] == false or v["ensure"] == "absent" or v["ensure"] == "false"
+          }
+        end
       else
         render "api/errors/not_found", :status => 404
       end
