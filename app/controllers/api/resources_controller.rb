@@ -5,9 +5,9 @@ module Api
     include Api::ResourcesSchema
 
     def index
-      h = Host.find_by_name!(params[:host_id])
+      info = Host.find_by_name!(params[:host_id]).info
       if schema['properties'][params[:puppetclass_id]]['properties'].has_key?(params[:type_id])
-        @data = h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:type_id]).value_for(h)
+        @data = info['classes'][params[:puppetclass_id]][params[:type_id]]
         if not params[:active_only] == "false"
           @data.delete_if { |k,v|
             v["ensure"] == false or v["ensure"] == "absent" or v["ensure"] == "false"
@@ -19,9 +19,9 @@ module Api
     end
 
     def show
-      h = Host.find_by_name!(params[:host_id])
+      info = Host.find_by_name!(params[:host_id]).info
       if schema['properties'][params[:puppetclass_id]]['properties'].has_key?(params[:type_id])
-        @data = h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:type_id]).value_for(h)[params[:id]] or render "api/errors/not_found", :status => 404
+        @data = info['classes'][params[:puppetclass_id]][params[:type_id]][params[:id]]
       else
         render "api/errors/not_found", :status => 404
       end
@@ -40,7 +40,6 @@ module Api
 
       h = Host.find_by_name!(params[:host_id])
 
-      puts h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:type_id]).to_s
       lv = h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:type_id]).lookup_values.find_or_create_by_match("fqdn=#{params[:host_id]}")
       lv.value = Hash.new if not lv.value
       lv.value[params[:id]] = @value

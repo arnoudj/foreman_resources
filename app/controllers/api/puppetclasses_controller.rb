@@ -8,10 +8,7 @@ module Api
       hosts = pclass.hosts
       @data = {}
       hosts.each { |host|
-        @data[host] = {}
-        pclass.class_params.each { |key|
-          @data[host][key.to_s] = key.value_for(host)
-        }
+        @data[host] = host.info['classes'][params[:id]]
       }
     end
 

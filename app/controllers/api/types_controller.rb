@@ -7,9 +7,9 @@ module Api
     end
 
     def show
-      h = Host.find_by_name!(params[:host_id])
+      info = Host.find_by_name!(params[:host_id]).info
       if schema['properties'][params[:puppetclass_id]]['properties'].has_key?(params[:id])
-        resources = h.puppetclasses.find_by_name!(params[:puppetclass_id]).class_params.find_by_key!(params[:id]).value_for(h)
+        resources = info['classes'][params[:puppetclass_id]][params[:id]]
         if not params[:active_only] == "false"
           resources.delete_if { |k,v|
             v["ensure"] == false or v["ensure"] == "absent" or v["ensure"] == "false"
